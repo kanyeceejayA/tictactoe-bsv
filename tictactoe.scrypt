@@ -27,6 +27,7 @@ contract TicTacToe {
         int play = this.isAliceTurn ? ALICE : BOB;
         PubKey player = this.isAliceTurn ? this.alice : this.bob;
 
+        require(checkSig(sig, player));
 
         // update state properties to make the move
         this.board[n] = play;
