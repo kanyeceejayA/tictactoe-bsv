@@ -1,23 +1,20 @@
-
 contract TicTacToe {
     PubKey alice;
     PubKey bob;
 
-    // if it is alice's turn to play
     @state
     bool isAliceTurn;
 
-    // state of the board. For example, a chess with Alice in the first row 
+    // state of the board. For example, a board with Alice in the first row 
     // and first column is expressed as [1,0,0,0,0,0,0,0,0]
     @state
     int[N] board;
-    
+
     static const int N = 9;
     static const int EMPTY = 0;
     static const int ALICE = 1;
     static const int BOB = 2;
 
-    
     public function move(int n, Sig sig, int amount, SigHashPreimage txPreimage) {
         require(Tx.checkPreimage(txPreimage));
         require(n >= 0 && n < N);
@@ -58,12 +55,9 @@ contract TicTacToe {
 
         // make sure the transaction contains the expected outputs
         require(hash256(outputs) == SigHash.hashOutputs(txPreimage));
-
     }
 
-
     function won(int play) : bool {
-        // three in a row, a column, or a diagonal
         int[8][3] lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
         bool anyLine = false;
@@ -75,10 +69,8 @@ contract TicTacToe {
 
             anyLine = anyLine || line;
         }
-
         return anyLine;
     }
-
 
     function full() : bool {
         bool full = true;
@@ -86,8 +78,7 @@ contract TicTacToe {
         loop (N) : i {
             full = full && this.board[i] != TicTacToe.EMPTY;
         }
-        
+
         return full;
     }
 }
-
