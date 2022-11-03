@@ -14,3 +14,5 @@ Once the game is over, the winner takes all the satoshis. If the game is a draw,
 
 The game is built using sCrypt which is copiled into bitcoin script. It runs on te bitcoinSV blockchain
 
+React is used for the front end, with scryptlib used to link the two.
+
